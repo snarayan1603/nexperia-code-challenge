@@ -4,6 +4,8 @@
 
 The **Email Outreach Platform** is a full-stack application designed for managing and automating email outreach campaigns. It provides a user-friendly interface for creating campaigns, sending bulk emails, and monitoring email delivery. The application integrates with APIs like SendGrid and Hugging Face to enhance functionality.
 
+## To check demo, pls visit https://idyllic-fairy-d3379f.netlify.app/
+
 ---
 
 ## Features
