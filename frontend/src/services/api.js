@@ -2,7 +2,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://nexperia-code-challenge.onrender.com/api", // Proxy is set up in package.json
+  baseURL: import.meta.env.VITE_BASE_URL, // Proxy is set up in package.json
 });
 
 // Add a request interceptor to include the token
