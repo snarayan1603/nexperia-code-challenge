@@ -70,7 +70,7 @@ backend
     ├── routes             # Express routes
     ├── services           # Business logic (e.g., email handling)
     ├── workers            # Queue workers
-    └── app.js             # Entry point for backend
+    └── index.js             # Entry point for backend
 ├── uploads                # Uploaded SCV
 ├── .env                   # Backend environment variables
 └── package.json           # Installation Requirements
