@@ -32,7 +32,7 @@ app.use("/api/metrics", metricsRoutes);
 mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => logger.info("MongoDB connected"))
-  .catch((err) => logger.error(err));
+  .catch((err) => console.log(err));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => logger.info(`Server running on port ${PORT}`));

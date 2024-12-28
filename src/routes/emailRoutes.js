@@ -25,6 +25,17 @@ router.post(
   emailController.sendCampaignEmails
 );
 
+router.get('/health', async (req, res) => {
+  try {
+    // Ping Redis through Bull
+    await emailQueue.isReady(); // Returns a promise that resolves when the queue is ready
+
+    res.status(200).json({ status: 'ok', message: 'Redis connection is healthy.' });
+  } catch (error) {
+    res.status(500).json({ status: 'error', message: 'Redis connection failed.', error: error.message });
+  }
+});
+
 router.get("/test-send", async (req, res, next) => {
   const emailContent = {
     to: "mr.singh160320@gmail.com",
@@ -32,12 +43,10 @@ router.get("/test-send", async (req, res, next) => {
     html: "Bsdiwala is working",
   };
 
+  emailQueue.add(emailContent, { delay: 1000 });
+
   res.json({
-    msg: await sendEmail(
-      emailContent.to,
-      emailContent.subject,
-      emailContent.html
-    ),
+    msg: "sending",
   });
 });
 
