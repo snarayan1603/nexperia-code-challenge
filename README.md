@@ -136,7 +136,12 @@ cd email-outreach-platform
    REDIS_URL=redis://localhost:6379
    ```
 
-4. Start the backend server:
+4. Generate a local SSL certificate (optional for HTTPS):
+   ```bash
+   openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout selfsigned.key -out selfsigned.crt
+   ```
+
+5. Start the backend server:
 
    ```bash
    npm start
@@ -289,4 +294,18 @@ VITE_BASE_URL=http://localhost:5000/api
 - **SendGrid** for email delivery.
 - **OpenAI** for content generation.
 - **Material-UI** for design components.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
