@@ -1,4 +1,6 @@
 // src/index.js
+const https = require('https');
+const fs = require('fs');
 const express = require("express");
 const dotenv = require("dotenv");
 
@@ -13,6 +15,12 @@ const templateRoutes = require("./routes/templateRoutes");
 const emailRoutes = require("./routes/emailRoutes");
 const aiRoutes = require("./routes/aiRoutes");
 const metricsRoutes = require("./routes/metricsRoutes");
+
+const options = {
+  key: fs.readFileSync('./ssl/server.key'),
+  cert: fs.readFileSync('./ssl/server.crt'),
+};
+
 
 const app = express();
 
@@ -34,5 +42,8 @@ mongoose
   .then(() => logger.info("MongoDB connected"))
   .catch((err) => console.log(err));
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => logger.info(`Server running on port ${PORT}`));
+// const PORT = process.env.PORT || 5000;
+// app.listen(PORT, () => logger.info(`Server running on port ${PORT}`));
+https.createServer(options, app).listen(443, () => {
+  console.log('Server is running on https://localhost:443');
+});
