@@ -6,6 +6,7 @@ const { ensureAuth } = require("../middleware/authMiddleware");
 const { check, validationResult } = require("express-validator");
 const emailQueue = require("../queues/emailQueue");
 const sendEmail = require("../utils/sendEmail");
+const logger = require("../utils/logger");
 
 // Send Campaign Emails Route
 router.post(
@@ -25,14 +26,22 @@ router.post(
   emailController.sendCampaignEmails
 );
 
-router.get('/health', async (req, res) => {
+router.get("/health", async (req, res) => {
   try {
     // Ping Redis through Bull
     await emailQueue.isReady(); // Returns a promise that resolves when the queue is ready
 
-    res.status(200).json({ status: 'ok', message: 'Redis connection is healthy.' });
+    res
+      .status(200)
+      .json({ status: "ok", message: "Redis connection is healthy." });
   } catch (error) {
-    res.status(500).json({ status: 'error', message: 'Redis connection failed.', error: error.message });
+    res
+      .status(500)
+      .json({
+        status: "error",
+        message: "Redis connection failed.",
+        error: error.message,
+      });
   }
 });
 
